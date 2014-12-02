@@ -34,12 +34,11 @@ class render {
 		$script_data = null;
 
 		$template_data = data::get_custom_field_data( $post->ID );
-		//var_dump( $template_data );
-		//die;
+
 		$engine = new Handlebars;
 
-		$engine->addHelper( 'is', array( 'caldera\helpers\is', 'helper' ) );
-		$engine->addHelper( '_image', array( 'caldera\helpers\image', 'helper' ) );
+		$engine = $this->helpers( $engine );
+
 
 		foreach( $meta_stack as $metaplate ){
 			// apply filter to data for this metaplate
@@ -72,6 +71,27 @@ class render {
 		}
 
 		return $content;
+
+	}
+
+	private function helpers( $handlebars ) {
+		$helpers = array(
+			array(
+				'name' => 'is',
+				'class' => 'caldera\helpers\is' ),
+			array(
+				'name' => '_image',
+				'class' => 'caldera\helpers\image' ),
+		);
+
+		$helpers = apply_filters( 'caldera_metaplate_handlebars_helpers', $helpers, $handlebars );
+		$handlebars = new helper_loader( $handlebars, $helpers );
+
+		if ( isset( $handlebars->handlebars ) ) {
+			$handlebars = $handlebars->handlebars;
+		}
+
+		return $handlebars;
 
 	}
 
