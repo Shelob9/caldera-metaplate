@@ -31,8 +31,16 @@ class image {
 		}
 		$parts = explode(" ", $args);
 		$tmp = $context->get( trim( $parts[0] ) );
-		$url = wp_get_attachment_image_src( $tmp, ( !empty( $parts[1] ) ? trim( $parts[1] ) : 'thumbnail' ) );
-		if( is_array( $url ) ){
+		if (isset( $tmp[ 'ID' ] ) ) {
+			$url = wp_get_attachment_image_src( $tmp[ 'ID' ] );
+
+
+		} else {
+			$url = wp_get_attachment_image_src( $tmp, ( ! empty( $parts[1] ) ? trim( $parts[1] ) : 'thumbnail' ) );
+
+		}
+
+		if( is_array( $url ) && isset( $url[0] ) ){
 			return $url[0];
 		}
 
