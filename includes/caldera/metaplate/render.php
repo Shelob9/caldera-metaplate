@@ -87,14 +87,7 @@ class render {
 	 * @return \Handlebars\Handlebars Current instance of Handlebars with the additional helpers added on.
 	 */
 	private function helpers( $handlebars ) {
-		$helpers = array(
-			array(
-				'name' => 'is',
-				'class' => 'caldera\helpers\is' ),
-			array(
-				'name' => '_image',
-				'class' => 'caldera\helpers\image' ),
-		);
+		$helpers = $this->default_helpers();
 
 		$helpers = apply_filters( 'caldera_metaplate_handlebars_helpers', $helpers, $handlebars );
 		$handlebars = new helper_loader( $handlebars, $helpers );
@@ -104,6 +97,23 @@ class render {
 		}
 
 		return $handlebars;
+
+	}
+
+	/**
+	 * The default helpers.
+	 *
+	 * @return array
+	 */
+	private function default_helpers() {
+		return  array(
+			array(
+				'name' => 'is',
+				'class' => 'caldera\helpers\is' ),
+			array(
+				'name' => '_image',
+				'class' => 'caldera\helpers\image' ),
+		);
 
 	}
 
