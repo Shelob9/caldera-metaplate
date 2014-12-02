@@ -12,6 +12,11 @@
 namespace caldera\metaplate;
 
 
+/**
+ * Class helper_loader
+ *
+ * @package caldera\metaplate
+ */
 class helper_loader {
 	/**
 	 * Handlebars.php class instance
@@ -21,8 +26,18 @@ class helper_loader {
 	public $handlebars;
 
 	/**
+	 * Constructor for class.
+	 *
 	 * @param obj|\Handlebars\Handlebars $handlebars Handlebars.php class instance
-	 * @param $helpers
+	 * @param array $helpers {
+	 *     Name, class & callback for the helper.
+	 *
+	 *     @type string $name Name of helper to use in Handlebars.
+	 *     @type string $class Class containing callback function.
+	 *     @type string $callback. Optional. The name of the callback function. If not set, "helper" will be used.
+	 * }
+	 *
+	 * @return obj|\Handlebars\Handlebars $handlebars Handlebars.php class instance
 	 */
 	function __construct( $handlebars, $helpers ) {
 		if ( is_a( $handlebars, 'Handlebars\Handlebars' ) ) {

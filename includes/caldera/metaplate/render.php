@@ -89,6 +89,18 @@ class render {
 	private function helpers( $handlebars ) {
 		$helpers = $this->default_helpers();
 
+		/**
+		 *
+		 * @param array $helpers {
+		 *     Name, class & callback for the helper.
+		 *
+		 *     @type string $name Name of helper to use in Handlebars.
+		 *     @type string $class Class containing callback function.
+		 *     @type string $callback. Optional. The name of the callback function. If not set, "helper" will be used.
+		 * }
+		 * @param obj|\Handlebars\Handlebars $handlebars Handlebars.php class instance
+		 *
+		 */
 		$helpers = apply_filters( 'caldera_metaplate_handlebars_helpers', $helpers, $handlebars );
 		$handlebars = new helper_loader( $handlebars, $helpers );
 
