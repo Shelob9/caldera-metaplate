@@ -14,9 +14,16 @@ namespace caldera\metaplate;
 
 class helper_loader {
 	/**
-	 * @var obj|\Handlebars\Handlebars
+	 * Handlebars.php class instance
+	 *
+	 * @var obj|\Handlebars\Handlebars Handlebars.php class instance
 	 */
 	public $handlebars;
+
+	/**
+	 * @param obj|\Handlebars\Handlebars $handlebars Handlebars.php class instance
+	 * @param $helpers
+	 */
 	function __construct( $handlebars, $helpers ) {
 		if ( is_a( $handlebars, 'Handlebars\Handlebars' ) ) {
 			$this->handlebars = $handlebars;
@@ -28,15 +35,27 @@ class helper_loader {
 
 	}
 
+	/**
+	 * Add the helpers to the Handlebars instance, if validation passes.
+	 *
+	 * @param array $helpers Array of helpers to add
+	 */
 	private function add_helpers( $helpers ) {
 		foreach( $helpers as $helper ) {
 			$helper = $this->validate_helper_input( $helper );
 			if ( is_array( $helper ) ) {
 				$this->add_helper( $helper );
 			}
+
 		}
+
 	}
 
+	/**
+	 * Add a single helper to the Handlebars instance.
+	 *
+	 * @param array $helper Array of information for this helper.
+	 */
 	private function add_helper( $helper ) {
 		$this->handlebars->addHelper(
 			$helper[ 'name' ],

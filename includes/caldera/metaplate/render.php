@@ -1,12 +1,12 @@
 <?php
 /**
- * @TODO What this does.
+ * Renders the metaplate
  *
- * @package   @TODO
- * @author    Josh Pollock <Josh@JoshPress.net>
+ * @package   @caldera_metaplate
+ * @author    David Cramer <david@digilab.co.za>
  * @license   GPL-2.0+
- * @link      
- * @copyright 2014 Josh Pollock
+ * @link
+ * @copyright 2014 David Cramer
  */
 
 namespace caldera\metaplate;
@@ -18,6 +18,9 @@ class render {
 	/**
 	 * Return the content with metaplate applied.
 	 *
+	 * @uses "the_content" filter
+	 *
+	 * @param string $content Post content
 	 *
 	 * @return    string    rendered HTML with templates applied
 	 */
@@ -74,6 +77,15 @@ class render {
 
 	}
 
+	/**
+	 * Register helpers.
+	 *
+	 * Adds the default helpers, plus any set on "caldera_metaplate_handlebars_helpers" filter.
+	 *
+	 * @param obj|\Handlebars\Handlebars $handlebars Current instance of Handlebars.
+	 *
+	 * @return \Handlebars\Handlebars Current instance of Handlebars with the additional helpers added on.
+	 */
 	private function helpers( $handlebars ) {
 		$helpers = array(
 			array(
