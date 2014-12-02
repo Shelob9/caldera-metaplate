@@ -2,7 +2,7 @@
 /**
  * Renders the metaplate
  *
- * @package   @caldera_metaplate
+ * @package caldera\metaplate
  * @author    David Cramer <david@digilab.co.za>
  * @license   GPL-2.0+
  * @link

@@ -2,7 +2,7 @@
 /**
  * Validate and add additional Handlebars helpers
  *
- * @package   @caldera_metaplate
+ * @package caldera\metaplate
  * @author    Josh Pollock <Josh@JoshPress.net>
  * @license   GPL-2.0+
  * @link      

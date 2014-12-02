@@ -2,7 +2,7 @@
 /**
  * Sets up data for loading metaplates and the fields.
  *
- * @package   @caldera_metaplate
+ * @package caldera\metaplate
  * @author    David Cramer <david@digilab.co.za>
  * @license   GPL-2.0+
  * @link
@@ -11,6 +11,11 @@
 
 namespace caldera\metaplate;
 
+/**
+ * Class data
+ *
+ * @package caldera\metaplate
+ */
 class data {
 	/**
 	 * Get the metaplates for the post

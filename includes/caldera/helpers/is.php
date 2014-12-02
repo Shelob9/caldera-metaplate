@@ -3,7 +3,7 @@
 /**
  * Adds a "is" helper for conditional checks.
  *
- * @package   @caldera_helpers
+ * @package caldera\helpers
  * @author    David Cramer <david@digilab.co.za>
  * @license   GPL-2.0+
  * @link
@@ -12,7 +12,11 @@
 
 namespace caldera\helpers;
 
-
+/**
+ * Class is
+ *
+ * @package caldera\helpers
+ */
 class is {
 	/**
 	 * Execute the is Helper for Handlebars.php {{#is variable value}} code {{else}} alt code {{/is}}

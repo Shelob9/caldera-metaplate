@@ -2,7 +2,7 @@
 /**
  * Adds a "_image" helper for getting the image URL from an image field.
  *
- * @package   @caldera_helpers
+ * @package caldera\helpers
  * @author    David Cramer <david@digilab.co.za>
  * @license   GPL-2.0+
  * @link      
@@ -11,7 +11,11 @@
 
 namespace caldera\helpers;
 
-
+/**
+ * Class image
+ *
+ * @package caldera\helpers
+ */
 class image {
 	/**
 	 * Execute the _image Helper for Handlebars.php {{_image image_id size}}
