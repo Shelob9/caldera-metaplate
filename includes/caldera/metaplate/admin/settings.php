@@ -1,7 +1,20 @@
 <?php
+/**
+ * @TODO What this does.
+ *
+ * @package   @TODO
+ * @author    Josh Pollock <Josh@JoshPress.net>
+ * @license   GPL-2.0+
+ * @link      
+ * @copyright 2014 Josh Pollock
+ */
+
+namespace caldera\metaplate\admin;
 
 
-class Settings_Metaplate extends Metaplate{
+use caldera\metaplate\init;
+
+class settings extends init {
 
 
 	/**
@@ -9,8 +22,6 @@ class Settings_Metaplate extends Metaplate{
 	 */
 	public function __construct(){
 
-		// add admin page
-		add_action( 'admin_menu', array( $this, 'add_settings_pages' ), 25 );
 		// save config
 		add_action( 'wp_ajax_mtpt_save_config', array( $this, 'save_config') );
 		// creat new
@@ -41,7 +52,7 @@ class Settings_Metaplate extends Metaplate{
 			if( !empty( $config['search_form'] ) ){
 				$updated_registery['search_form'] = $config['search_form'];
 			}
-			
+
 			$metaplates[$config['id']] = $updated_registery;
 			update_option( '_metaplates_registry', $metaplates );
 		}
@@ -63,7 +74,7 @@ class Settings_Metaplate extends Metaplate{
 		$config = array();
 		if( !empty( $_POST['metaplate-setup'] ) && empty( $_POST['config'] ) ){
 			$config = stripslashes_deep( $_POST );
-			
+
 			self::update_settings( $config );
 
 			wp_redirect( '?page=metaplate&updated=true' );
@@ -96,7 +107,7 @@ class Settings_Metaplate extends Metaplate{
 
 			wp_send_json_success( $_POST );
 		}
-		
+
 		wp_send_json_error( $_POST );
 
 	}
@@ -104,7 +115,7 @@ class Settings_Metaplate extends Metaplate{
 	 * create new metaplate
 	 */
 	public function create_new_metaplate(){
-		
+
 		$metaplates = get_option('_metaplates_registry');
 		if( empty( $metaplates ) ){
 			$metaplates = array();
@@ -123,51 +134,9 @@ class Settings_Metaplate extends Metaplate{
 			update_option( '_metaplates_registry', $metaplates );
 
 			// end
-			wp_send_json_success( $new_metaplate );			
+			wp_send_json_success( $new_metaplate );
 		}
 	}
 
-	/**
-	 * Add options page
-	 */
-	public function add_settings_pages(){
-		// This page will be under "Settings"
-		
-	
-			$this->plugin_screen_hook_suffix['metaplate'] =  add_submenu_page( 'themes.php', __( 'Metaplate', $this->plugin_slug ), __( 'Metaplate', $this->plugin_slug ), 'manage_options', 'metaplate', array( $this, 'create_admin_page' ) );
-			add_action( 'admin_print_styles-' . $this->plugin_screen_hook_suffix['metaplate'], array( $this, 'enqueue_admin_stylescripts' ) );
 
-
-	}
-
-
-	/**
-	 * Options page callback
-	 */
-	public function create_admin_page(){
-		// Set class property        
-		$screen = get_current_screen();
-		$base = array_search($screen->id, $this->plugin_screen_hook_suffix);
-			
-		// include main template
-		if( empty( $_GET['edit'] ) ){
-			include MTPT_PATH .'includes/admin.php';
-		}else{
-			include MTPT_PATH .'includes/edit.php';
-		}
-
-
-		// php based script include
-		if( file_exists( MTPT_PATH .'assets/js/inline-scripts.php' ) ){
-			echo "<script type=\"text/javascript\">\r\n";
-				include MTPT_PATH .'assets/js/inline-scripts.php';
-			echo "</script>\r\n";
-		}
-
-	}
-
-
-}
-
-if( is_admin() )
-	$settings_metaplates = new Settings_Metaplate();
+} 

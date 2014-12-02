@@ -31,13 +31,15 @@ define('MTPT_VER',  '1.0.0' );
 //autoload dependencies uncomment after running composer update
 require_once( MTPT_PATH . 'vendor/autoload.php' );
 
-// load internals
-require_once( MTPT_PATH . 'core-class.php' );
-require_once( MTPT_PATH . 'includes/settings.php' );
+
 
 // Load instance
-add_action( 'plugins_loaded', array( 'Metaplate', 'get_instance' ) );
-//Metaplate::get_instance();
+add_action( 'plugins_loaded', function() {
+	require_once( MTPT_PATH . 'core-class.php' );
+	new Metaplate();
+
+}, 13 );
+
 
 //Temporary psr-4 autoloader for now
 //@todo rm
@@ -47,17 +49,8 @@ add_action( 'plugins_loaded', function(){
 	$class_loader->addNamespace( 'caldera', MTPT_PATH . 'includes/caldera' );
 
 	$class_loader->register();
+	// load internals
 
-});
+}, 11 );
 
-/**
- * Hook output action
- *
- * @todo Figure out if this make any sense?
- */
-add_action( 'init', function() {
-	$render = new caldera\metaplate\render();
-	// add filter.
-	add_filter( 'the_content', array( $render, 'render_metaplate' ), 9 );
-});
 
