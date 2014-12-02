@@ -33,9 +33,31 @@ require_once( MTPT_PATH . 'vendor/autoload.php' );
 
 // load internals
 require_once( MTPT_PATH . 'core-class.php' );
-require_once( MTPT_PATH . 'includes/helpers.php' );
 require_once( MTPT_PATH . 'includes/settings.php' );
 
 // Load instance
 add_action( 'plugins_loaded', array( 'Metaplate', 'get_instance' ) );
 //Metaplate::get_instance();
+
+//Temporary psr-4 autoloader for now
+//@todo rm
+add_action( 'plugins_loaded', function(){
+	include_once( MTPT_PATH .'includes/classloader.php' );
+	$class_loader = new Caldera_MetaPlate_Autoloader();
+	$class_loader->addNamespace( 'caldera', MTPT_PATH . 'includes/caldera' );
+
+	$class_loader->register();
+
+});
+
+/**
+ * Hook output action
+ *
+ * @todo Figure out if this make any sense?
+ */
+add_action( 'init', function() {
+	$render = new caldera\metaplate\render();
+	// add filter.
+	add_filter( 'the_content', array( $render, 'render_metaplate' ), 9 );
+});
+
