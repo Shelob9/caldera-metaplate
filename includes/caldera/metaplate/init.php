@@ -57,5 +57,13 @@ class init {
 
 	}
 
+	public function define_admin_template_path() {
+		$template_path = dirname( __FILE__ ).'/templates/';
+
+		if ( ! defined( 'MTPT_ADMIN_TEMPLATE_PATH' ) ) {
+			define( 'MTPT_ADMIN_TEMPLATE_PATH', $template_path );
+		}
+	}
+
 
 } 

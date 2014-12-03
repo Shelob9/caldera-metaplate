@@ -32,6 +32,13 @@ class Metaplate {
 			)
 		);
 
+		//set MTPT_ADMIN_TEMPLATE_PATH if not already set
+		add_action( 'plugins_loaded', array(
+				caldera\metaplate\init::get_instance(),
+				'define_admin_template_path'
+			),  1
+		);
+
 		//render output
 		$render = new caldera\metaplate\render();
 		// add filter.

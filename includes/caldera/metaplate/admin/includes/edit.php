@@ -14,7 +14,7 @@ $metaplate = get_option( $_GET['edit'] );
 <script type="text/html" id="main-ui-template">
 	<?php
 	// pull in the join table card template
-	include MTPT_PATH . 'includes/templates/main-ui.php';
+	include MTPT_ADMIN_TEMPLATE_PATH . 'main-ui.php';
 	?>	
 </script>
 
