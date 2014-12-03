@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define('MTPT_PATH',  plugin_dir_path( __FILE__ ) );
-define('MTPT_URL',  plugin_dir_url( __FILE__ ) );
+define('MTPT_URL',  plugin_dir_url( __FILE__ ) .'includes/caldera/metaplate' );
 define('MTPT_VER',  '1.0.0' );
 
 //autoload dependencies uncomment after running composer update
